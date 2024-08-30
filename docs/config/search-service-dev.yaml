@@ -1,0 +1,16 @@
+server:
+  port: 8050
+spring:
+  cloud:
+    nacos:
+      # 配置服务注册中心的地址, 启动时, 将自己的服务信息注册到注册中心
+      server-addr: localhost:8848
+      discovery:
+        # 指定使用当前项目专属的命名空间
+        namespace: ${spring.cloud.nacos.config.namespace}
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+es:
+  init:
+    key: gfo2389thj2e09f2olkj23t8hjgyois89

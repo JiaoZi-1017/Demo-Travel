@@ -1,0 +1,8 @@
+server:
+  port: 8030
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///wolf2w-article?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 123456

@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///wolf2w-user?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 123456
+aliyun:
+  accessKey:
+    id: LTAI5t5v6FABHTRRPU684tzF
+    secret: QlFMFeKXycLnFVptxZ11sV709cqdE0
+  dysms:
+    endpoint: dysmsapi.aliyuncs.com
+    sign: 阿里云短信测试
+    templateCode: SMS_154950909

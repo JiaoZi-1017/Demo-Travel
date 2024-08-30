@@ -1,0 +1,79 @@
+server:
+  port: 9999
+spring:
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        namespace: ${spring.cloud.nacos.config.namespace}
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - PATCH
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      discovery:
+        locator:
+          enabled: true # 让 gateway 可以发现 nacos 中的微服务
+      routes:
+        # 路由 id, 只要保证唯一即可
+        - id: user_route
+          # uri: 路由转发的路径, 匹配到的请求最终转发到哪里去
+          # lb == load balance == 负载均衡
+          uri: lb://user-service
+          # 断言: 匹配规则, 按照设置的断言规则进行匹配, 如果匹配成功, 则将请求转发到 uri 上
+          predicates:
+            # 路径匹配, 前缀匹配方式, 只要以 /product-serv/ 开头的请求, 都会被转发到 uri 上去
+            - Path=/u/**
+          # 过滤器, 执行真正的转发之前, 要执行哪些过滤器
+          filters:
+            # StripPrefix: 跳过前缀的过滤器, 此处配置为 1 则表示在转发请求前, 自动将第一个前缀删除
+            # 例如: 请求地址为 /product-serv/products/1, 此时将前缀删除后, 会变成 /products/1
+            - StripPrefix=1
+        - id: article_route
+          uri: lb://article-service
+          predicates:
+            - Path=/article/**
+          filters:
+            - StripPrefix=1
+        - id: comment_route
+          uri: lb://comment-service
+          predicates:
+            - Path=/comment/**
+          filters:
+            - StripPrefix=1
+        - id: search_route
+          uri: lb://search-service
+          predicates:
+            - Path=/search/**
+          filters:
+            - StripPrefix=1
+        - id: article-swagger2
+          predicates: Path=/swagger/article/**
+          uri: lb://article-service
+          filters:
+            # 截掉前2个请求路径 例如: 8111/api/test/admin/get --> 8111/admin/get
+            - StripPrefix=2
+        - id: user-swagger2
+          predicates: Path=/swagger/user/**
+          uri: lb://user-service
+          filters:
+            - StripPrefix=2   
+        - id: comment-swagger2
+          predicates: Path=/swagger/comment/**
+          uri: lb://comment-service
+          filters:
+            - StripPrefix=2
+        - id: search-swagger2
+          predicates: Path=/swagger/search/**
+          uri: lb://search-service
+          filters:
+            - StripPrefix=2

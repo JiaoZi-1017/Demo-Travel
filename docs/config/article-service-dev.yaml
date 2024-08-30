@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///wolf2w-article?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 123456
+aliyun:
+  accessKey:
+    id: LTAI5tBqJ76mdCKQCSuyiapM
+    secret: tqhjJ9GwvWvxSiUot82vBbpKV1Bo1X
+  oss:
+    bucket-name: cd-wolf2w-cloud
+    endpoint: https://oss-cn-chengdu.aliyuncs.com
+    domain: https://cd-wolf2w-cloud.oss-cn-chengdu.aliyuncs.com

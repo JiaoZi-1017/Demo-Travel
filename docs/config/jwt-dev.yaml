@@ -1,0 +1,4 @@
+jwt:
+  secret: s2fwq6sdf2vfg4w6w2x45ft4w65a2
+  # 配置分钟数, 后台自动转换为毫秒值
+  expireTime: 30
